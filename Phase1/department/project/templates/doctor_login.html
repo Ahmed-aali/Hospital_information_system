@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Login</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #121212; /* Dark background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: rgba(28, 28, 28, 0.95); /* Subtle dark background for the form */
+            padding: 40px;
+            border-radius: 8px;
+            width: 340px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .login-container:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        h2 {
+            color: #00A6FF; /* Signature blue accent color */
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        label {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        input[type=email], input[type=password] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            transition: border 0.3s ease;
+        }
+
+        input[type=email]:focus, input[type=password]:focus {
+            border-color: #00A6FF;
+            outline: none;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 12px;
+            background-color: #00A6FF;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type=submit]:hover {
+            background-color: #0084CC;
+        }
+
+        .error {
+            color: #FF6666;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Doctor Login</h2>
+        <form action="/doctorlogin" method="POST">
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <input type="submit" value="Log In">
+        </form>
+        {% if msg %}
+            <p class="error">{{ msg }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

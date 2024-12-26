@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Patient Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+        }
+        input, textarea, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Update Patient Data</h2>
+        {% if message %}
+            <p class="{{ 'success' if 'successfully' in message else 'error' }}">{{ message }}</p>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="patient_ssn" placeholder="Enter Patient SSN" value="{{ patient.ssn if patient else '' }}" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if patient %}
+        <hr>
+        <h3>Patient Data</h3>
+        <p>Name: {{ patient.first_name }} {{ patient.last_name }}</p>
+        <p>SSN: {{ patient.ssn }}</p>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="patient_ssn" value="{{ patient.ssn }}">
+            <textarea name="diagnosis" placeholder="Add Diagnosis"></textarea>
+            <input type="file" name="scans" multiple>
+            <button type="submit">Update</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

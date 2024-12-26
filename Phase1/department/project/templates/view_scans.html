@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Scans</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #00daff;
+        }
+
+        .scans-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .scan {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .scan img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scan:hover {
+            transform: scale(1.05);
+        }
+
+        /* Fullscreen Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scans for the Patient</h1>
+    <div class="scans-container">
+        {% for scan in scans %}
+        <div class="scan" onclick="openModal('{{ url_for('static', filename='uploads/Scans/' + scan) }}')">
+            <img src="{{ url_for('static', filename='uploads/Scans/' + scan) }}" alt="Scan">
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <div class="modal" id="scanModal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="Full Screen Scan">
+    </div>
+
+    <script>
+        function openModal(imageSrc) {
+            const modal = document.getElementById('scanModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('scanModal');
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

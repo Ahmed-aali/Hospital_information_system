@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <style>
+        body, html {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('/static/images/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #444;
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            background-color: #0056a6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #003d75;
+        }
+
+        .message {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/logout">Logout</a> |
+        <a href="/profilepage">Profile</a> |
+        <a href="/editprofile">Edit Profile</a>
+    </nav>
+    <div class="form-container">
+        <h2>Book Appointment with Dr. {{ doctor_fname }} {{ doctor_lname }}</h2>
+        {% if msg %}
+            <div class="message {% if 'success' in msg.lower() %}success{% else %}error{% endif %}">
+                {{ msg }}
+            </div>
+        {% endif %}
+        <form method="POST">
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required min="0" max="150">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ssn">SSN:</label>
+                <input type="text" id="ssn" name="ssn" required pattern="\d{9}" title="Please enter a 9-digit SSN">
+            </div>
+            <div class="form-group">
+        <label for="appointment_date">Appointment Date:</label>
+        <input type="datetime-local"
+               id="appointment_date"
+               name="appointment_date"
+               required>
+    </div>
+
+<script>
+    // Set minimum date and time to now
+    const appointmentDateInput = document.getElementById('appointment_date');
+
+    // Function to format date-time for the input
+    function formatDateTime(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+
+    // Set min attribute to current date/time
+    const now = new Date();
+    appointmentDateInput.min = formatDateTime(now);
+</script>
+            <button type="submit" class="submit-btn">Book Appointment</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor's Patients</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ccc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            color: #00daff;
+        }
+        .patient-card {
+            background-color: rgba(50, 50, 50, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .patient-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .patient-card a {
+            color: #00daff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Patients of Dr. {{ session['doctor_user']['fname'] }}</h1>
+
+    <!-- Search Bar -->
+    <form method="POST" action="/patientsdoctor">
+        <input type="text" name="patient_ssn" placeholder="Enter Patient SSN" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Patient List -->
+    {% if patients %}
+        {% for patient in patients %}
+            <div class="patient-card">
+
+                <h3>{{ patient.first_name }} {{ patient.last_name }}</h3>
+
+                <a href="/view_scans/{{ patient.patient_id }}">View Scans</a> |
+                <a href="/view_diagnoses/{{ patient.patient_id }}">View Diagnoses</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No patients found.</p>
+    {% endif %}
+</body>
+</html>

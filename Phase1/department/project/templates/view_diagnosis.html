@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Diagnoses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #00aaff;
+        }
+        .diagnosis {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #1e1e1e;
+        }
+        .diagnosis-date {
+            color: #ccc;
+            font-size: 0.9em;
+        }
+        .diagnosis-text {
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Diagnoses</h1>
+        {% for diagnosis in diagnoses %}
+            <div class="diagnosis">
+                <div class="diagnosis-date">Date: {{ diagnosis.diagnosis_date }}</div>
+                <div class="diagnosis-text">{{ diagnosis.diagnosis }}</div>
+            </div>
+        {% else %}
+            <p>No diagnoses available for this patient.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

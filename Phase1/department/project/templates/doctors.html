@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors - {{ specialization }}</title>
+    <style>
+        body, html {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('/static/images/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #444;
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .service-container {
+            background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .doctor-card {
+            display: flex; /* Enable Flexbox */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+            justify-content: center; /* Center items vertically */
+            margin: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #0056a6;
+            color: white;
+            text-align: center;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .doctor-card img {
+            width: 100%; /* Optional: Adjust this size if needed */
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .doctor-card h3 {
+            margin: 10px 0 5px;
+            font-size: 1.2em;
+            text-align: center; /* Ensure the name is centered */
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            background-color: #003d75;
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/logout">Logout</a> |
+        <a href="/profilepage">Profile</a> |
+        <a href="/editprofile">Edit Profile</a>
+    </nav>
+    <div class="service-container">
+        <h2>Doctors Specialized in {{ specialization }}</h2>
+        <div class="doctors">
+            {% for doctor in doctors %}
+               <a href="{{ url_for('book_appointment', doctor_id=doctor.id, doctor_fname=doctor.fname, doctor_lname=doctor.lname) }}" style="text-decoration: none;">
+                    <div class="doctor-card">
+                        <img src="/static/uploads/doctors_images/{{ doctor.image }}" >
+                        <h3>{{ doctor.fname }} {{ doctor.lname }}</h3>
+                    </div>
+               </a>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

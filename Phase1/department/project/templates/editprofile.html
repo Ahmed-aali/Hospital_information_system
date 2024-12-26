@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+<style>
+        body, html {
+            background-image: url('/static/images/bg.jpg');
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #606468;
+        }
+
+        .container-xl {
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 25px;
+            margin: 40px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            color: #0088cc;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        .nav-link.active {
+            color: #005577;
+            font-weight: bold;
+        }
+
+        .card {
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #0088cc;
+            color: white;
+            font-size: 20px;
+            padding: 15px 20px;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #00aabb;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0088aa;
+        }
+
+        .btn-secondary {
+            background-color: #cccccc;
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #bbbbbb;
+        }
+
+        @media (max-width: 768px) {
+            .container-xl {
+                width: 90%;
+                margin: 20px auto;
+            }
+        }
+         header, nav, .content, footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+        nav {
+            background-color: #444;
+        }
+        nav a {
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<nav>
+        <a href="/logout">logout</a> |
+        <a href="/profilepage">Profile</a> |
+      <a href="/home">Home</a>
+    </nav>
+    <div class="container-xl px-4 mt-4">
+
+
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card mb-4">
+                    <div class="card-header">Edit Account Details</div>
+                    <div class="card-body">
+                        <form method="POST" action="/editprofile" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputPassword">New Password</label>
+                                <input class="form-control" id="inputPassword" name="password" type="password" placeholder="Enter new password">
+                            </div>
+                             <div class="mb-3">
+                                <label class="small mb-1" for="inputPhone">New Phone number</label>
+                                <input class="form-control" id="inputPhone" name="phone" type="phone" placeholder="Enter new phone">
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="profileImage">Profile Image</label>
+                                <input class="form-control" id="profileImage" name="profile_image" type="file">
+                            </div>
+                            <button class="btn btn-primary" type="submit">Save changes</button>
+                        </form>
+                        {% if msg %}
+                            <div class="alert alert-info mt-3">{{ msg }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="/profilepage" class="btn btn-secondary">Return to Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

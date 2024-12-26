@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>User Registration Form</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('/static/images/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh; /* To ensure it covers the entire screen height */
+
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7); /* Dark overlay similar to the index page */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            color: white; /* White text for better readability */
+        }
+
+        h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50; /* Matching with index page button color */
+            color: white;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049; /* Slightly darker green on hover */
+        }
+
+        .alert {
+            padding: 10px;
+            background-color: #f44336;
+            color: white;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .bottom {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .bottom a {
+            color: #4CAF50; /* Green color for the link */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .bottom a:hover {
+            text-decoration: underline;
+        }
+
+        .form-group input[type="file"] {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Registration</h2>
+        {% if msg %}
+            <div class="alert alert-warning">{{ msg }}</div>
+        {% endif %}
+        <form action="/register" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="profile_image">Profile Image:</label>
+                <input type="file" name="profile_image" id="profile_image" required>
+            </div>
+            <div class="form-group">
+                <label for="fname">First Name:</label>
+                <input type="text" name="fname" required class="form-control" id="fname" placeholder="Enter First Name" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="midname">Middle Name:</label>
+                <input type="text" name="midname" required class="form-control" id="midname" placeholder="Enter Middle Name" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name:</label>
+                <input type="text" name="lname" required class="form-control" id="lname" placeholder="Enter Last Name" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" required class="form-control" id="email" placeholder="Enter Email" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" name="phone" required class="form-control" id="phone" placeholder="Enter Phone Number" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" required class="form-control" id="password" placeholder="Enter Password">
+            </div>
+
+            <button type="submit" class="btn">Register</button>
+
+            <p class="bottom">Already have an account? <a href="/login">Login here</a></p>
+        </form>
+    </div>
+</body>
+</html>

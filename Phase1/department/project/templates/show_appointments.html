@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 10px; /* Add space between buttons */
+        }
+        .btn-custom {
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-size: 14px;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-update {
+            background-color: #3498db;
+            color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-custom:hover {
+            opacity: 0.9;
+            transform: translateY(-2px); /* Subtle lift effect on hover */
+        }
+        .alert-info {
+            font-size: 16px;
+        }
+        .input-status {
+            width: 150px;
+            margin-right: 15px;
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 50px;
+            transition: border-color 0.3s ease-in-out;
+        }
+        .input-status:focus {
+            border-color: #3498db; /* Highlight on focus */
+            outline: none;
+        }
+        .input-status::placeholder {
+            color: #7f8c8d;
+            font-style: italic;
+            padding-left: 10px; /* Spacing between text and placeholder */
+        }
+        .table td input[type="text"] {
+            width: 120px;
+            margin-right: 10px;
+        }
+        .table th, .table td {
+            font-size: 14px;
+            padding: 10px;
+        }
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Appointments</h2>
+
+        {% if msg %}
+            <div class="alert alert-info">{{ msg }}</div>
+        {% endif %}
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Patient Name</th>
+                    <th>Patient Last Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Appointment Date</th>
+                    <th>Doctor First Name</th>
+                    <th>Doctor Last Name</th>
+                    <th>Status</th>
+                    <th>Patient ID</th>
+                    <th>SSN</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.appointment_id }}</td>
+                    <td>{{ appointment.patient_name }}</td>
+                    <td>{{ appointment.patient_lname }}</td>
+                    <td>{{ appointment.patient_age }}</td>
+                    <td>{{ appointment.patient_gender }}</td>
+                    <td>{{ appointment.appointment_date }}</td>
+                    <td>{{ appointment.appointment_doctor_fname }}</td>
+                    <td>{{ appointment.appointment_doctor_lname }}</td>
+                    <td>{{ appointment.appointment_status }}</td>
+                    <td>{{ appointment.patient_id }}</td>
+                    <td>{{ appointment.patient_ssn }}</td>
+                    <td class="action-buttons">
+                        <form method="POST" style="display: inline-block;">
+                            <input type="hidden" name="appointment_id" value="{{ appointment.appointment_id }}">
+                            <button type="submit" name="action" value="delete" class="btn btn-delete btn-custom">Delete</button>
+                        </form>
+                        <form method="POST" style="display: inline-block;">
+                            <input type="hidden" name="appointment_id" value="{{ appointment.appointment_id }}">
+{#                            <input type="text" name="new_status" placeholder="New Status" class="form-control input-status" required>#}
+{#                            <button type="submit" name="action" value="update" class="btn btn-update btn-custom">Update</button>#}
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

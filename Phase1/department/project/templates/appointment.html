@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Specializations</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('/static/images/bg.jpg'); /* Consistent with the theme */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        header, nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+
+        nav {
+            background-color: #444;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .service-container {
+            background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .specializations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            width: 150px;
+            padding: 10px;
+            background-color: #0056a6; /* Consistent with the theme */
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background-color: #003d75; /* Darker shade for hover state */
+        }
+
+        .card-title {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/logout">Logout</a> |
+        <a href="/profilepage">Profile</a> |
+        <a href="/editprofile">Edit Profile</a>
+    </nav>
+    <div class="service-container">
+        <h2>Available Specializations</h2>
+        <div class="specializations">
+            {% for specialization in specializations %}
+               <div class="card" onclick="window.location.href='/doctors/{{ specialization }}'">
+                        <div class="card-title">{{ specialization }}</div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
